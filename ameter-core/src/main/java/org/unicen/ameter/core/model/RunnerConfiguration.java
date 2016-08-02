@@ -1,4 +1,4 @@
-package org.unicen.ameter.core;
+package org.unicen.ameter.core.model;
 
 public interface RunnerConfiguration {
 
