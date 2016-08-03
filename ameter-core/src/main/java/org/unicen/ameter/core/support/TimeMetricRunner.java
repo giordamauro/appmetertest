@@ -59,10 +59,4 @@ public class TimeMetricRunner implements MetricRunner<TimeMetricResult, Operatio
 
         return results;
     }
-
-    public static void main(String[] args) {
-        //TODO: Implement RunnerConfiguration (does it need to be an interface? To be extendable
-        //TODO: Create test class for ameter-core module
-        // TODO: 03/08/2016 How does TimeMetricRunner returns Average times?
-    }
 }

@@ -7,6 +7,12 @@ import org.unicen.ameter.core.model.Operation;
  */
 public class EmptyOperation implements Operation<Void> {
 
+    public static final EmptyOperation INSTANCE = new EmptyOperation();
+
+    private EmptyOperation() {
+
+    }
+
     @Override
     public Void execute() {
         return null;
