@@ -1,7 +1,7 @@
 package org.unicen.ameter.core.support;
 
 /**
- * Created by Mauro on 02/08/2016.
+ * Created by Mauro Giorda on 02/08/2016.
  */
 public class TimeMetricResult {
 
