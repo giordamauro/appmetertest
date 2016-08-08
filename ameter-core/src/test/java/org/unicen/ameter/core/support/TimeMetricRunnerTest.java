@@ -28,12 +28,12 @@ public class TimeMetricRunnerTest {
             }
         };
 
-        TimeMetricRunner runner = new TimeMetricRunner(config);
+        TimeMetricBatchRunner runner = new TimeMetricBatchRunner(config, new TimeMetricRunner());
 
-        Collection<TimeMetricResult> results = runner.runOperation(EmptyOperation.INSTANCE);
+        Collection<TimeMetricResult> results = runner.execute(EmptyOperation.INSTANCE);
 
         int i = 0;
-        for (TimeMetricResult result: results) {
+        for (TimeMetricResult result : results) {
 
             System.out.println("Iteration " + i + ": " + result.getTimeInMilliseconds());
             i++;
