@@ -11,12 +11,12 @@ public class TimeMetricRunner implements MetricRunner<TimeMetricResult, Operatio
     @Override
     public TimeMetricResult execute(Operation operation) {
 
-        double start = System.currentTimeMillis();
+        long start = System.nanoTime();
         operation.execute();
-        double end = System.currentTimeMillis();
+        long end = System.nanoTime();
 
-        final double executeTimeMillis = end - start;
+        final long executeTimeNanos = end - start;
 
-        return new TimeMetricResult(executeTimeMillis);
+        return new TimeMetricResult(executeTimeNanos);
     }
 }

@@ -3,11 +3,6 @@ package org.unicen.ameter.core.support;
 import org.junit.Test;
 import org.unicen.ameter.core.model.RunnerConfiguration;
 
-import java.util.Collection;
-
-/**
- * Created by Mauro Giorda on 03/08/2016.
- */
 public class TimeMetricRunnerTest {
 
     @Test
@@ -30,12 +25,12 @@ public class TimeMetricRunnerTest {
 
         TimeMetricBatchRunner runner = new TimeMetricBatchRunner(config, new TimeMetricRunner());
 
-        Collection<TimeMetricResult> results = runner.execute(EmptyOperation.INSTANCE);
+        TimeMetricBatchResult results = runner.execute(EmptyOperation.INSTANCE);
 
         int i = 0;
-        for (TimeMetricResult result : results) {
+        for (TimeMetricResult result : results.getMetricIterations()) {
 
-            System.out.println("Iteration " + i + ": " + result.getTimeInMilliseconds());
+            System.out.println("Iteration " + i + ": " + result.getTimeInNanoseconds());
             i++;
         }
     }
