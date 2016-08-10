@@ -5,6 +5,8 @@ import org.unicen.ameter.core.model.Operation;
 
 /**
  * Created by Mauro Giorda on 02/08/2016.
+ *
+ * Generates the time Metric for a given operation (in nanoseconds).
  */
 public class TimeMetricRunner implements MetricRunner<TimeMetricResult, Operation> {
 

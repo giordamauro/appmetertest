@@ -7,9 +7,10 @@ public class TimeMetricRunnerTest {
 
     @Test
     public void timeMetricRunnerIntegrationTest() {
-        //TODO: Implement RunnerConfiguration (does it need to be an interface? To be extensible
-        // TODO: 03/08/2016 How does TimeMetricRunner returns Average times?
-
+        // TODO: 10/08/2016 Document every class (Model classes)
+        // TODO: 10/08/2016 Integrate test with Android app.
+        // TODO: 10/08/2016 Think how to export values
+        // TODO: 10/08/2016 Parallel batch runner? Implement
 
         RunnerConfiguration config = new RunnerConfiguration() {
             @Override
@@ -23,15 +24,10 @@ public class TimeMetricRunnerTest {
             }
         };
 
-        TimeMetricBatchRunner runner = new TimeMetricBatchRunner(config, new TimeMetricRunner());
+        TimeMetricBatchRunner runner = new TimeMetricBatchRunner(new TimeMetricRunner(), config);
 
         TimeMetricBatchResult results = runner.execute(EmptyOperation.INSTANCE);
 
-        int i = 0;
-        for (TimeMetricResult result : results.getMetricIterations()) {
-
-            System.out.println("Iteration " + i + ": " + result.getTimeInNanoseconds());
-            i++;
-        }
+        System.out.println("Overhead average time: " + results.getAvgTimeInNanoseconds() + " nanoseconds");
     }
 }

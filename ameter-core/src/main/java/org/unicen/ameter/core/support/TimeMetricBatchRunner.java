@@ -21,10 +21,14 @@ public class TimeMetricBatchRunner<O> implements MetricBatchRunner<TimeMetricRes
     /**
      * Public constructor.
      *
-     * @param runnerConfiguration The config for this batch run
-     * @param timeMetricRunner    The object providing time metrics itself
+     * @param timeMetricRunner    The object providing time metrics itself - Not null
+     * @param runnerConfiguration The config for this batch run - Not null
      */
-    public TimeMetricBatchRunner(RunnerConfiguration runnerConfiguration, TimeMetricRunner timeMetricRunner) {
+    public TimeMetricBatchRunner(TimeMetricRunner timeMetricRunner, RunnerConfiguration runnerConfiguration) {
+
+        Objects.requireNonNull(timeMetricRunner, "TimeMetricRunner cannot be null");
+        Objects.requireNonNull(runnerConfiguration, "RunnerConfiguration cannot be null");
+
         this.runnerConfiguration = runnerConfiguration;
         this.timeMetricRunner = timeMetricRunner;
     }

@@ -10,9 +10,14 @@ public class TimeMetricResult {
 
     /**
      * Default Consutructor. Enforces immutability
-     * @param timeInNanoseconds long nanoseconds
+     * @param timeInNanoseconds long nanoseconds Must be positive
      */
     public TimeMetricResult(long timeInNanoseconds) {
+
+        if(timeInNanoseconds < 0) {
+            throw new IllegalArgumentException("TimeInNanoseconds cannot be negative");
+        }
+
         this.timeInNanoseconds = timeInNanoseconds;
     }
 
@@ -22,9 +27,8 @@ public class TimeMetricResult {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("TimeMetricResult{");
-        sb.append("timeInNanoseconds=").append(timeInNanoseconds);
-        sb.append('}');
-        return sb.toString();
+        return "TimeMetricResult{" +
+                "timeInNanoseconds=" + timeInNanoseconds +
+                '}';
     }
 }
