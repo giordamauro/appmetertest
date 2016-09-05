@@ -9,7 +9,7 @@ public class TimeMetricRunnerTest {
     public void timeMetricRunnerIntegrationTest() {
         // TODO: 10/08/2016 Document every class (Model classes)
         // TODO: 10/08/2016 Integrate test with Android app.
-        // TODO: 10/08/2016 Think how to export values
+        // TODO: 10/08/2016 Think how to export values -> JSON
         // TODO: 10/08/2016 Parallel batch runner? Implement
 
         RunnerConfiguration config = new RunnerConfiguration() {

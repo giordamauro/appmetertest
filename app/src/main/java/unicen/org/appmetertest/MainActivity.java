@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.unicen.ameter.context.engine.ContextContainer;
+import org.unicen.ameter.core.support.TimeMetricBatchRunner;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
         InputStream assetInput = openAsset("context.json");
         ContextContainer contextContainer = ContextContainer.createFrom(assetInput);
 
-        ProgressDialog progressdialog = ProgressDialog.show(MainActivity.this, "Application", "Running tests", true);
+        // TODO: 05/09/2016 Complete
+        contextContainer.getBean(TimeMetricBatchRunner.class);
+
+        ProgressDialog progressDialog = ProgressDialog.show(MainActivity.this, "Application", "Running tests", true);
     }
 
     private InputStream openAsset(String assetName) {
