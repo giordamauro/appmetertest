@@ -21,13 +21,16 @@
             "class": "org.unicen.ameter.core.support.SimpleRunnerConfiguration",
             "constructorArgs": [
               {
-                "value": "${iterations}"
+                "value": "${iterations}",
+                "type": "int"
+
               }
             ],
             "properties": [
               {
                 "name": "warmupIterations",
-                "value": "${warmup}"
+                "value": "${warmup}",
+                "type": "int"
               }
             ]
           }
