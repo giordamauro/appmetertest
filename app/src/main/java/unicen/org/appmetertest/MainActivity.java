@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         ContextContainer contextContainer = ContextContainer.createFrom(assetInput);
 
         // TODO: 05/09/2016 Complete
-        TimeMetricBatchRunner runner = contextContainer.getBean(TimeMetricBatchRunner.class);
-        runner.execute(EmptyOperation.INSTANCE);
+//        TimeMetricBatchRunner runner = contextContainer.getBean(TimeMetricBatchRunner.class);
+//        runner.execute(EmptyOperation.INSTANCE);
 
         ProgressDialog progressDialog = ProgressDialog.show(MainActivity.this, "Application", "Running tests", true);
     }

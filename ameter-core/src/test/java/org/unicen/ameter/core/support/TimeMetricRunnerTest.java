@@ -1,7 +1,7 @@
 package org.unicen.ameter.core.support;
 
 import org.junit.Test;
-import org.unicen.ameter.core.model.RunnerConfiguration;
+import org.unicen.ameter.core.model.RunConfiguration;
 
 public class TimeMetricRunnerTest {
 
@@ -12,7 +12,7 @@ public class TimeMetricRunnerTest {
         // TODO: 10/08/2016 Think how to export values -> JSON
         // TODO: 10/08/2016 Parallel batch runner? Implement
 
-        RunnerConfiguration config = new RunnerConfiguration() {
+        RunConfiguration config = new RunConfiguration() {
             @Override
             public int getWarmupIterations() {
                 return 5;
@@ -24,9 +24,9 @@ public class TimeMetricRunnerTest {
             }
         };
 
-        TimeMetricBatchRunner runner = new TimeMetricBatchRunner(new TimeMetricRunner(), config);
+        TimeMetricBatchRunner runner = new TimeMetricBatchRunner(new TimeMetricRunner());
 
-        TimeMetricBatchResult results = runner.execute(EmptyOperation.INSTANCE);
+        TimeMetricBatchResult results = runner.execute(EmptyOperation.INSTANCE, config);
 
         System.out.println("Overhead average time: " + results.getAvgTimeInNanoseconds() + " nanoseconds");
     }

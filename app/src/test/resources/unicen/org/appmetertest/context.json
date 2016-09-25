@@ -8,32 +8,64 @@
 
   "beans": [
     {
-      "id": "timeMetricBatchRunner",
-      "class": "org.unicen.ameter.core.support.TimeMetricBatchRunner",
+      "class": "org.unicen.ameter.core.engine.ExecutionPlan",
       "constructorArgs": [
         {
-          "bean": {
-            "class": "org.unicen.ameter.core.support.TimeMetricRunner"
-          }
-        },
-        {
-          "bean": {
-            "class": "org.unicen.ameter.core.support.SimpleRunnerConfiguration",
-            "constructorArgs": [
-              {
-                "value": "${iterations}",
-                "type": "int"
-
+          "list": [
+            {
+              "bean": {
+                "class": "org.unicen.ameter.core.engine.Execution",
+                "constructorArgs": [
+                  {
+                    "bean": {
+                      "class": "org.unicen.ameter.core.support.TimeMetricBatchRunner",
+                      "constructorArgs": [
+                        {
+                          "bean": {
+                            "class": "org.unicen.ameter.core.support.TimeMetricRunner"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "list": [
+                      {
+                        "bean": {
+                          "class": "org.unicen.ameter.core.engine.OperationExecution",
+                          "constructorArgs": [
+                            {
+                              "bean": {
+                                "class": "org.unicen.ameter.core.support.EmptyOperation"
+                              }
+                            },
+                            {
+                              "bean": {
+                                "class": "org.unicen.ameter.core.support.SimpleRunnerConfiguration",
+                                "constructorArgs": [
+                                  {
+                                    "value": "${iterations}",
+                                    "type" : "int"
+                                  }
+                                ],
+                                "properties": [
+                                  {
+                                    "name": "warmupIterations",
+                                    "value": "${warmup}",
+                                    "type" : "int"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
               }
-            ],
-            "properties": [
-              {
-                "name": "warmupIterations",
-                "value": "${warmup}",
-                "type": "int"
-              }
-            ]
-          }
+            }
+          ]
         }
       ]
     }

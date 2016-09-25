@@ -2,6 +2,7 @@ package org.unicen.ameter.core.support;
 
 import org.unicen.ameter.core.model.MetricRunner;
 import org.unicen.ameter.core.model.Operation;
+import org.unicen.ameter.core.model.RunConfiguration;
 
 /**
  * Created by Mauro Giorda on 02/08/2016.

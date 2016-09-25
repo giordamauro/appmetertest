@@ -1,13 +1,11 @@
 package org.unicen.ameter.core.support;
 
-import org.unicen.ameter.core.model.RunnerConfiguration;
-
-import java.util.Objects;
+import org.unicen.ameter.core.model.RunConfiguration;
 
 /**
  * Created by Mauro Giorda on 04/09/2016.
  */
-public class SimpleRunnerConfiguration implements RunnerConfiguration {
+public class SimpleRunnerConfiguration implements RunConfiguration {
 
     private final int operationIterations;
 

@@ -253,14 +253,14 @@ public class BeanContainer {
         List<Class<?>> types = getValueTypesTypes(argList);
         Constructor<?> constructor = findContructorForTypes(beanClass, types);
 
-        try {
-            List<Object> values = getValueTypesValues(argList);
-            Object[] constructorArgs = values.toArray();
+        List<Object> values = getValueTypesValues(argList);
+        Object[] constructorArgs = values.toArray();
 
+        try {
             return constructor.newInstance(constructorArgs);
 
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            throw new IllegalStateException(String.format("Exception creating instance for class '%s' by constructor %s - Args: %s", beanClass.getName(), constructor, values), e);
         }
     }
 
