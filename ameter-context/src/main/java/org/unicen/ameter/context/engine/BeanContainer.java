@@ -250,42 +250,26 @@ public class BeanContainer {
 
     public Object createInstanceByConstructorArgs(Class<?> beanClass, List<ValueType> argList) {
 
-        List<Class<?>> types = getValueTypesTypes(argList);
-        Constructor<?> constructor = findContructorForTypes(beanClass, types);
-
         List<Object> values = getValueTypesValues(argList);
         Object[] constructorArgs = values.toArray();
 
-        try {
-            return constructor.newInstance(constructorArgs);
-
-        } catch (Exception e) {
-            throw new IllegalStateException(String.format("Exception creating instance for class '%s' by constructor %s - Args: %s", beanClass.getName(), constructor, values), e);
-        }
-    }
-
-    public Constructor findContructorForTypes(Class<?> beanClass, List<Class<?>> types) {
-
-        Objects.requireNonNull(beanClass, "beanClass cannot be null");
-        Objects.requireNonNull(types, "types cannot be null");
-
-        Constructor<?> constructor;
-
         Constructor<?>[] constructors = beanClass.getDeclaredConstructors();
-        if(constructors.length == 1) {
-            constructor = constructors[0];
-        }
-        else {
-            Class<?>[] parameterTypes = types.toArray(new Class<?>[types.size()]);
+        Object instance = null;
+        int i = 0;
 
+        while(instance == null && i < constructors.length) {
             try {
-                constructor = beanClass.getConstructor(parameterTypes);
+                instance = constructors[i].newInstance(constructorArgs);
             } catch (Exception e) {
-                throw new IllegalStateException(e);
+                i++;
             }
         }
 
-        return constructor;
+        if(instance == null){
+            throw new IllegalStateException(String.format("Exception creating instance for class '%s' by constructors %s - Args: %s", beanClass.getName(), constructors, values));
+        }
+
+        return instance;
     }
 
     public Class<?> getClassForName(String classType) {

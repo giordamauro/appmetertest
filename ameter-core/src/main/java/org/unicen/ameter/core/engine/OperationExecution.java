@@ -12,6 +12,7 @@ public class OperationExecution {
 
     private final Operation operation;
     private final RunConfiguration config;
+    private String name;
 
     public OperationExecution(Operation operation, RunConfiguration config) {
 
@@ -28,5 +29,13 @@ public class OperationExecution {
 
     public RunConfiguration getConfig() {
         return config;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

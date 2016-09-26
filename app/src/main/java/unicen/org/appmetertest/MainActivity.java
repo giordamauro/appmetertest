@@ -9,6 +9,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.unicen.ameter.context.engine.ContextContainer;
+import org.unicen.ameter.core.engine.Execution;
+import org.unicen.ameter.core.engine.ExecutionPlan;
+import org.unicen.ameter.core.engine.OperationExecution;
+import org.unicen.ameter.core.model.MetricBatchResult;
+import org.unicen.ameter.core.model.MetricBatchRunner;
+import org.unicen.ameter.core.model.Operation;
+import org.unicen.ameter.core.model.RunConfiguration;
 import org.unicen.ameter.core.support.EmptyOperation;
 import org.unicen.ameter.core.support.TimeMetricBatchRunner;
 
@@ -16,6 +23,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,23 +44,43 @@ public class MainActivity extends AppCompatActivity {
         InputStream assetInput = openAsset("context.json");
         ContextContainer contextContainer = ContextContainer.createFrom(assetInput);
 
-        // TODO: 05/09/2016 Complete
-//        TimeMetricBatchRunner runner = contextContainer.getBean(TimeMetricBatchRunner.class);
-//        runner.execute(EmptyOperation.INSTANCE);
-
         ProgressDialog progressDialog = ProgressDialog.show(MainActivity.this, "Application", "Running tests", true);
+
+        int i = 1;
+        List<MetricBatchResult> results = new ArrayList<>();
+
+        ExecutionPlan executionPlan = contextContainer.getBean(ExecutionPlan.class);
+        for(Execution execution : executionPlan.getExecutions()) {
+
+            MetricBatchRunner runner = execution.getRunner();
+            for(OperationExecution operationExecution : execution.getOperations()) {
+
+                Operation operation = operationExecution.getOperation();
+                RunConfiguration config = operationExecution.getConfig();
+
+                progressDialog.setMessage("Running test " + i);
+
+                MetricBatchResult result = runner.execute(operation, config);
+                results.add(result);
+                i++;
+            }
+        }
+
+        System.out.println(gson.toJson(results));
+
+        finish();
     }
 
     private InputStream openAsset(String assetName) {
 
         try {
-            InputStream asset = getAssets().open(assetName);
-
-            return asset;
+            return getAssets().open(assetName);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
     }
+
+
     private static void displayLogcat(TextView textView) {
         try {
             Process process = Runtime.getRuntime().exec("logcat -d");
